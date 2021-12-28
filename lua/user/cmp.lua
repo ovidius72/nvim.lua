@@ -54,8 +54,10 @@ end
 --   פּ ﯟ   蘒練 some other good icons
 local kind_icons = {
   Text = "",
-  Method = "m",
-  Function = "",
+  -- Method = "m",
+  Method = "",
+  -- Function = "",
+  Function = "",
   Constructor = "",
   Field = "",
   Variable = "",

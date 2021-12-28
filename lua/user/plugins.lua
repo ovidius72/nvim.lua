@@ -81,7 +81,9 @@ return packer.startup(function(use)
   use "metakirby5/codi.vim"
   use "gelguy/wilder.nvim"
   use "dstein64/vim-win"
+  use ""
   -- use { "ray-x/navigator.lua", requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" } }
+  use "machakann/vim-sandwich"
   use "wellle/targets.vim"
   use "tpope/vim-unimpaired"
   use "tpope/vim-surround"
@@ -90,6 +92,10 @@ return packer.startup(function(use)
     run = "cd app && npm install",
     ft = "markdown",
   }
+  use { "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" }
+  use "mbbill/undotree"
+  use "simnalamburt/vim-mundo"
+  use "kdheepak/lazygit.nvim"
 
   -- Colorschemes
   use "folke/tokyonight.nvim"

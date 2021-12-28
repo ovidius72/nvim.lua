@@ -37,6 +37,7 @@ keymap("n", "<A-Left>", ":vertical resize -2<CR>", opts)
 keymap("n", "<A-Right>", ":vertical resize +2<CR>", opts)
 
 -- Naviagate buffers
+keymap("n", "<leader>l", "<cmd>Telescope buffers<cr>", opts)
 keymap("n", "<S-l>", ":bnext<CR>", opts)
 keymap("n", "<S-h>", ":bprevious<CR>", opts)
 keymap("n", "<leader>be", ":so %<CR>", opts)
@@ -77,7 +78,7 @@ keymap("x", "<A-k>", ":move '<-2<CR>gv-gv", opts)
 keymap("n", "<leader>wd", "<cmd>:q<cr>", opts)
 keymap("n", "<leader>wv", "<cmd>:vs<cr>", opts)
 keymap("n", "<leader>ws", "<cmd>:sp<cr>", opts)
-keymap("n", "<leader>l", "<cmd>Telescope buffers<cr>", opts)
+
 -- Custom
 keymap("n", "<leader>hh", "<cmd>nohlsearch<cr>", opts)
 keymap("n", "<S-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", opts)

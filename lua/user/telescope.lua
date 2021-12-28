@@ -97,13 +97,13 @@ telescope.setup {
     },
   },
 }
-vim.api.nvim_set_keymap('n',
-  '<leader>fw',
-  [[<cmd>lua require('telescope.builtin').grep_string()<cr>]],
-  { silent = true, noremap = true })
+-- vim.api.nvim_set_keymap('n',
+--   '<leader>sG',
+--   [[<cmd>lua require('telescope.builtin').grep_string()<cr>]],
+--   { silent = true, noremap = true })
 
 vim.api.nvim_set_keymap('n',
-  '<leader>fW',
+  '<leader>sW',
   [[<cmd>lua require('telescope.builtin').grep_string({grep_open_files = true })<cr>]],
   { silent = true, noremap = true })
 
@@ -115,15 +115,26 @@ SearchVimFiles = function()
 end
 
 vim.api.nvim_set_keymap('v', '<leader><leader>v', 'y<ESC>:Telescope live_grep default_text=<c-r>0<CR>', {noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader><leader>s', '<cmd>lua require("telescope.builtin").live_grep({default_text=<c-r>0})<CR>', {noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader><leader>s', '<cmd>lua require("telescope.builtin").live_grep({default_text=<c-r>0})<CR>', {noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader><leader>b', '<cmd>lua require("telescope.builtin").builtin()<CR>', {noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader><leader>B', '<cmd>lua require("telescope.builtin").file_browser()<CR>', {noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader><leader>r', '<cmd>lua require("telescope.builtin").registers()<CR>', {noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader><leader>l', '<cmd>lua require("telescope.builtin").spell_suggest()<CR>', {noremap = true, silent = true })
+-- vim.api.nvim_set_keymap('n', '<leader><leader>j', '<cmd>lua require("telescope.builtin").jumplist()<CR>', {noremap = true, silent = true })
 vim.api.nvim_set_keymap('n', "<leader>fef", "<cmd>lua SearchVimFiles()<CR>", {noremap = true, silent = true })
+
 vim.api.nvim_set_keymap('n',
-'<leader><leader>S',
+'<leader>sg',
 "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For> ')})<cr>",
 {noremap = true, silent = true })
 
 vim.api.nvim_set_keymap('n',
-'<leader><leader>s',
+'<leader>ss',
+"<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>",
+{noremap = true, silent = true })
+
+vim.api.nvim_set_keymap('n',
+'<leader>sw',
 "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>')})<cr>",
 {noremap = true, silent = true })
 -- nnoremap <leader><leader>w <cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand("<cword>")})<cr>

@@ -97,9 +97,9 @@ local function highlight(group, properties)
   vim.api.nvim_command(cmd)
 end
 
-for group, properties in pairs(Cmp) do
-  highlight(group, properties)
-end
+-- for group, properties in pairs(Cmp) do
+--   highlight(group, properties)
+-- end
 
 function SetCmpColors()
   for group, properties in pairs(Cmp) do
@@ -107,9 +107,9 @@ function SetCmpColors()
   end
 end
 
-vim.cmd [[
-  augroup MyColors
-    autocmd!
-    autocmd ColorScheme * lua SetCmpColors()  
-  augroup END
-]]
+-- vim.cmd [[
+--   augroup MyColors
+--     autocmd!
+--     autocmd ColorScheme * lua SetCmpColors()  
+--   augroup END
+-- ]]
