@@ -48,8 +48,13 @@ return packer.startup(function(use)
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim"
+
   use "kyazdani42/nvim-web-devicons"
   use "kyazdani42/nvim-tree.lua"
+  -- use "lambdalisue/fern.vim"
+  -- use "lambdalisue/fern-git-status.vim"
+  -- use "lambdalisue/fern-renderer-nerdfont.vim"
+  -- use "antoinemadec/FixCursorHold.nvim"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
@@ -132,6 +137,9 @@ return packer.startup(function(use)
   use "simrat39/symbols-outline.nvim"
   use "ray-x/lsp_signature.nvim"
   use "b0o/SchemaStore.nvim"
+  use "RishabhRD/popfix"
+  use "RishabhRD/nvim-lsputils"
+  use { "tami5/lspsaga.nvim" } -- nightly
   use {
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
@@ -144,6 +152,7 @@ return packer.startup(function(use)
   use "nvim-telescope/telescope.nvim"
   use "tom-anders/telescope-vim-bookmarks.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
+  use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
   -- Treesitter
   use {

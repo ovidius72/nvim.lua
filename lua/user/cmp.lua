@@ -179,7 +179,7 @@ cmp.setup {
     }),
   },
   formatting = {
-    fields = {"kind", "menu", "abbr" },
+    fields = { "kind", "menu", "abbr" },
     format = function(entry, vim_item)
       -- Kind icons
       -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
@@ -212,19 +212,19 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "nvim_lsp" },
-    { name = "luasnip" },
-    { name = "nvim_lua" },
-    { name = "buffer" },
-    { name = "path" },
-    { name = "emoji" },
+    { name = "nvim_lsp", priority = 6 },
+    { name = "luasnip", priority = 5 },
+    { name = "buffer", priority = 4 },
+    { name = "nvim_lua", priority = 3 },
+    { name = "path", priority = 2 },
+    { name = "emoji", priority = 1 },
   },
   confirm_opts = {
     behavior = cmp.ConfirmBehavior.Replace,
     select = false,
   },
   documentation = {
-  	border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+    border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
   experimental = {
     ghost_text = true,

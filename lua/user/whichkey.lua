@@ -103,14 +103,9 @@ local opts = {
 -- }
 
 local mappings = {
-  -- ["a"] = { "<cmd>Alpha<CR>", "Alpha" },
-  -- ["b"] = {
-  --   "<cmd>lua require('telescope.builtin').buffers(require('telescope.themes').get_dropdown{previewer = false})<CR>",
-  --   "Buffers",
-  -- },
   ["<tab>"] = { "Prev Buffer" },
-  ["i"] = { "<cmd>Telescope find_files<CR>", "Find File" },
-  ["l"] = { "<cmd>Telescope find_files<CR>", "Find File" },
+  ["i"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find File" },
+  ["l"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Find File" },
   ["["] = { "<cmd>NvimTreeToggle<CR>", "Open Explorer" },
   ["]"] = { "<cmd>NvimTreeFindFile<CR>", "Explorer" },
   ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
@@ -123,12 +118,12 @@ local mappings = {
     name = "Telescope",
     s = { "<cmd>Telescope live_grep default_text=<c-r>0<CR>", "Live Grep" },
     S = { "<cmd>Telescope grep_string<CR>", "Grep String" },
-    b = { "<cmd>Telescope builtin<CR>", "Builtins"},
-    B = { "<cmd>Telescope file_browser<CR>", "File Browser"},
-    r = { "<cmd>Telescope registers<CR>", "Register"},
-    l = { "<cmd>Telescope spell_suggest<CR>", "Spell Suggest"},
-    j = { "<cmd>Telescope jumplist<CR>", "Jumplist"},
-    m = { "<cmd>Telescope marks<CR>", "Marks"},
+    b = { "<cmd>Telescope builtin<CR>", "Builtins" },
+    B = { "<cmd>Telescope file_browser<CR>", "File Browser" },
+    r = { "<cmd>Telescope registers<CR>", "Register" },
+    l = { "<cmd>Telescope spell_suggest<CR>", "Spell Suggest" },
+    j = { "<cmd>Telescope jumplist<CR>", "Jumplist" },
+    m = { "<cmd>Telescope marks<CR>", "Marks" },
   },
 
   a = {
@@ -299,7 +294,7 @@ local mappings = {
     m = { "<cmd>Telescope marks<CR>", "Marks" },
     j = { "<cmd>Telescope jumplist<CR>", "Jumplist" },
     r = { "<cmd>Telescope registers<CR>", "Recent File" },
-    s = { "Search in buffer" },
+    S = { "Search in buffer" },
   },
 
   S = {
@@ -312,6 +307,9 @@ local mappings = {
 
   t = {
     name = "Toggle",
+    ["1"] = { "RosePine Dawn" },
+    ["2"] = { "RosePine Moon" },
+    ["3"] = { "RosePine Base" },
     f = { "<cmd>ToggleTerm direction=float<CR>", "Term Float" },
     h = { "<cmd>ToggleTerm size=10 direction=horizontal<CR>", "Term H" },
     v = { "<cmd>ToggleTerm size=80 direction=vertical<CR>", "Term V" },

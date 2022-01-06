@@ -1,4 +1,5 @@
 local M = {}
+local map = vim.api.nvim_buf_set_keymap
 
 M.setup = function()
   local signs = {
@@ -45,6 +46,15 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
+  vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+  vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
+  vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
+  vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
+  vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
+  vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
+  vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
+  vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
+
   --  vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
   --  vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
   --  vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
@@ -69,7 +79,7 @@ local function lsp_highlight_document(client)
     )
   end
 end
-
+local a
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -79,16 +89,30 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cR", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>od", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "[c", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(bufnr, "n", "]c", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
-  vim.api.nvim_buf_set_keymap(
-    bufnr,
-    "n",
-    "gl",
-    '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
-    opts
-  )
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>od", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[c", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
+  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]c", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
+
+  map(0, "n", "<leader>ch", "<cmd>Lspsaga signature_help<cr>", { silent = true, noremap = true })
+  map(0, "n", "<leader>cr", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
+  map(0, "n", "go", "<cmd>Lspsaga lsp_finder<cr>", { silent = true, noremap = true })
+  map(0, "n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
+  map(0, "x", "<leader>ca", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
+  map(0, "n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
+  map(0, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
+  map(0, "n", "gp", "<cmd>Lspsaga preview_definition<cr>", { silent = true, noremap = true })
+  map(0, "n", "]c", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
+  map(0, "n", "[c", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
+  map(0, "n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
+  map(0, "n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
+
+  -- vim.api.nvim_buf_set_keymap(
+  --   bufnr,
+  --   "n",
+  --   "gl",
+  --   '<cmd>lua vim.lsp.diagnostic.show_line_diagnostics({ border = "rounded" })<CR>',
+  --   opts
+  -- )
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>q", "<cmd>lua vim.diagnostic.setloclist()<CR>", opts)
   vim.cmd [[ command! Format execute 'lua vim.lsp.buf.formatting()' ]]
 end
