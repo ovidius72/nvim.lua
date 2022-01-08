@@ -47,10 +47,10 @@ nvim_tree.setup {
   auto_close = true,
   open_on_tab = false,
   hijack_cursor = false,
-  update_cwd = false,
+  update_cwd = true,
   update_to_buf_dir = {
     enable = true,
-    auto_open = true,
+    auto_open = false,
   },
 --   error
 --   info
@@ -67,8 +67,8 @@ nvim_tree.setup {
     },
   },
   update_focused_file = {
-    enable = true,
-    update_cwd = true,
+    enable = false,
+    update_cwd = false,
     ignore_list = {},
   },
   system_open = {
@@ -81,7 +81,7 @@ nvim_tree.setup {
   },
   git = {
     enable = true,
-    ignore = true,
+    ignore = false,
     timeout = 500,
   },
   view = {
@@ -126,5 +126,5 @@ let g:nvim_tree_group_empty = 0 " 0 by default, compact folders that only contai
 let g:nvim_tree_disable_window_picker = 0 "0 by default, will disable the window picker.
 let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
 let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
-let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+let g:nvim_tree_respect_buf_cwd = 0 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
 ]]

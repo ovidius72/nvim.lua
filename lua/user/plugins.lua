@@ -44,17 +44,43 @@ return packer.startup(function(use)
   -- My plugins here
   use "wbthomason/packer.nvim" -- Have packer manage itself
   use "nvim-lua/popup.nvim" -- An implementation of the Popup API from vim in Neovim
-  use "tjdevries/astronauta.nvim" -- An implementation of the Popup API from vim in Neovim
+  -- use "tjdevries/astronauta.nvim" -- An implementation of the Popup API from vim in Neovim
+  -- use {
+  --   "aserowy/tmux.nvim",
+  --   config = function()
+  --     require("tmux").setup {
+  --       -- overwrite default configuration
+  --       -- here, e.g. to enable default bindings
+  --       copy_sync = {
+  --         -- enables copy sync and overwrites all register actions to
+  --         -- sync registers *, +, unnamed, and 0 till 9 from tmux in advance
+  --         enable = true,
+  --       },
+  --       navigation = {
+  --         -- enables default keybindings (C-hjkl) for normal mode
+  --         enable_default_keybindings = false,
+  --       },
+  --       resize = {
+  --         -- enables default keybindings (A-hjkl) for normal mode
+  --         enable_default_keybindings = false,
+  --       },
+  --     }
+  --   end,
+  -- }
   use "nvim-lua/plenary.nvim" -- Useful lua functions used ny lots of plugins
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim"
 
-  use "kyazdani42/nvim-web-devicons"
-  use "kyazdani42/nvim-tree.lua"
-  -- use "lambdalisue/fern.vim"
-  -- use "lambdalisue/fern-git-status.vim"
-  -- use "lambdalisue/fern-renderer-nerdfont.vim"
-  -- use "antoinemadec/FixCursorHold.nvim"
+  -- use "kyazdani42/nvim-web-devicons"
+  -- use "kyazdani42/nvim-tree.lua"
+  use "matze/vim-move"
+  use "lambdalisue/fern.vim"
+  use "lambdalisue/nerdfont.vim"
+  use "lambdalisue/fern-git-status.vim"
+  use "lambdalisue/fern-renderer-nerdfont.vim"
+  use "yuki-yano/fern-preview.vim"
+  use "lambdalisue/glyph-palette.vim"
+  use "antoinemadec/FixCursorHold.nvim"
   use "akinsho/bufferline.nvim"
   use "moll/vim-bbye"
   use "nvim-lualine/lualine.nvim"
@@ -98,6 +124,8 @@ return packer.startup(function(use)
     ft = "markdown",
   }
   use { "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" }
+  use { "junegunn/fzf", dir = '~/.fzf', run = ':call fzf#install'}
+  use "junegunn/fzf.vim"
   use "mbbill/undotree"
   use "simnalamburt/vim-mundo"
   use "kdheepak/lazygit.nvim"

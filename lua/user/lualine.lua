@@ -75,6 +75,16 @@ local spaces = function()
   return "spaces: " .. vim.api.nvim_buf_get_option(0, "shiftwidth")
 end
 
+local function getGPS()
+  local is_available = gps.is_available()
+  local res = gps.get_location()
+  if is_available and res ~= "Error" and res ~= nil then
+    return res
+  else
+    return ''
+  end
+end
+
 lualine.setup {
   options = {
     icons_enabled = true,
@@ -89,7 +99,7 @@ lualine.setup {
     lualine_b = { mode },
     lualine_c = {
       {
-        gps.get_location,
+        getGPS,
         condition = gps.is_available,
       },
     },

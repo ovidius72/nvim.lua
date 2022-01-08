@@ -1,4 +1,6 @@
 local cmp_status_ok, cmp = pcall(require, "cmp")
+local types = require "cmp.types"
+
 if not cmp_status_ok then
   return
 end
@@ -117,6 +119,36 @@ cmp.setup {
       luasnip.lsp_expand(args.body) -- For `luasnip` users.
     end,
   },
+  sorting = {
+    comparators = {
+      cmp.config.compare.score,
+      -- function(entry1, entry2)
+      --   local kind1 = entry1:get_kind()
+      --   kind1 = kind1 == types.lsp.CompletionItemKind.Text and 100 or kind1
+      --   local kind2 = entry2:get_kind()
+      --   kind2 = kind2 == types.lsp.CompletionItemKind.Text and 100 or kind2
+      --   if kind1 ~= kind2 then
+      --     if kind1 == types.lsp.CompletionItemKind.Snippet then
+      --       return false
+      --     end
+      --     if kind2 == types.lsp.CompletionItemKind.Snippet then
+      --       return true
+      --     end
+      --     local diff = kind1 - kind2
+      --     if diff < 0 then
+      --       return true
+      --     elseif diff > 0 then
+      --       return false
+      --     end
+      --   end
+      -- end,
+      cmp.config.compare.offset,
+      cmp.config.compare.exact,
+      cmp.config.compare.sort_text,
+      cmp.config.compare.length,
+      cmp.config.compare.order,
+    },
+  },
   mapping = {
     ["<C-k>"] = cmp.mapping.select_prev_item(),
     ["<C-j>"] = cmp.mapping.select_next_item(),
@@ -178,17 +210,32 @@ cmp.setup {
       "s",
     }),
   },
+  -- VSCode style
+  -- formatting = {
+  --   format = function(_, vim_item)
+  --     vim_item.kind = (kind_icons[vim_item.kind] .. ' ' or '') .. vim_item.kind
+  --     return vim_item
+  --   end,
+  -- },
+  -- minimal VSCode style
+  -- formatting = {
+  --   fields = { "kind", "abbr" },
+  --   format = function(_, vim_item)
+  --     vim_item.kind = kind_icons[vim_item.kind] or ""
+  --     return vim_item
+  --   end,
+  -- },
   formatting = {
     fields = { "kind", "menu", "abbr" },
     format = function(entry, vim_item)
       -- Kind icons
       -- vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
       vim_item.menu = ({
+        path = "[Path]",
         nvim_lsp = "[LSP]",
         nvim_lua = "[Nvim]",
         luasnip = "[Snip]",
         buffer = "[Buf]",
-        path = "[Path]",
         emoji = "[Emoji]",
         -- nvim_lsp = "",
         -- nvim_lua = "",
@@ -205,7 +252,6 @@ cmp.setup {
       vim_item.kind = string.format("%s %s ", kind_icons[vim_item.kind], abbr) -- This concatonates the icons with the name of the item kind
       vim_item.abbr = string.format(" %05s%10s ", menu, kind) -- This concatonates the icons with the name of the item kind
       vim_item.menu = "" -- string.format("%-50s", menu) -- This concatonates the icons with the name of the item kind
-      -- vim_item.info = vim_item.info -- string.format("%-50s", menu) -- This concatonates the icons with the name of the item kind
 
       -- NOTE: order matters
       return vim_item
@@ -213,8 +259,18 @@ cmp.setup {
   },
   sources = {
     { name = "nvim_lsp", priority = 6 },
-    { name = "luasnip", priority = 5 },
-    { name = "buffer", priority = 4 },
+    { name = "path", priority = 6, max_item_count = 3 },
+    { name = "luasnip", priority = 5, max_item_count = 3 },
+    {
+      name = "buffer",
+      option = {
+        priority = 4,
+        max_item_count = 5,
+        get_bufnrs = function()
+          return vim.api.nvim_list_bufs()
+        end,
+      },
+    },
     { name = "nvim_lua", priority = 3 },
     { name = "path", priority = 2 },
     { name = "emoji", priority = 1 },
@@ -227,7 +283,36 @@ cmp.setup {
     border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
   },
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
     native_menu = false,
   },
+  cmp.setup.cmdline("/", {
+    sources = { name = "buffer" },
+  }),
 }
+
+-- cmp.setup.cmdline(":", {
+--   sources = cmp.config.sources({
+--     { name = "path" },
+--   }, {
+--     { name = "cmdline" },
+--   }),
+-- })
+vim.cmd [[
+" gray
+highlight! CmpItemAbbrDeprecated guibg=NONE gui=strikethrough guifg=#808080
+" blue
+highlight! CmpItemAbbrMatch guibg=NONE guifg=#569CD6
+highlight! CmpItemAbbrMatchFuzzy guibg=NONE guifg=#569CD6
+" light blue
+highlight! CmpItemKindVariable guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindInterface guibg=NONE guifg=#9CDCFE
+highlight! CmpItemKindText guibg=NONE guifg=#9CDCFE
+" pink
+highlight! CmpItemKindFunction guibg=NONE guifg=#C586C0
+highlight! CmpItemKindMethod guibg=NONE guifg=#C586C0
+" front
+highlight! CmpItemKindKeyword guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindProperty guibg=NONE guifg=#D4D4D4
+highlight! CmpItemKindUnit guibg=NONE guifg=#D4D4D4
+]]

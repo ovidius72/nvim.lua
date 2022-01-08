@@ -50,7 +50,7 @@ local setup = {
     winblend = 0,
   },
   layout = {
-    height = { min = 4, max = 25 }, -- min and max height of the columns
+    height = { min = 4, max = 30 }, -- min and max height of the columns
     width = { min = 20, max = 50 }, -- min and max width of the columns
     spacing = 3, -- spacing between columns
     align = "left", -- align columns left, center or right
@@ -104,11 +104,13 @@ local opts = {
 
 local mappings = {
   ["<tab>"] = { "Prev Buffer" },
-  ["i"] = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "Find File" },
-  ["l"] = { "<cmd>lua require('telescope.builtin').buffers()<CR>", "Find File" },
-  ["["] = { "<cmd>NvimTreeToggle<CR>", "Open Explorer" },
-  ["]"] = { "<cmd>NvimTreeFindFile<CR>", "Explorer" },
+  ["i"] = { "<cmd>:Files<CR>", "Find File" },
+  ["l"] = { "<cmd>:Buffers<CR>", "Open Buffers" },
+  ["["] = { "<cmd>:Fern . -drawer -toggle -width=35<CR>", "Open Explorer" },
+  ["]"] = { "<cmd>:Fern . -drawer -reveal=% -width=35<CR>", "Focus Explorer" },
   ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
+  -- ["["] = { "<cmd>NvimTreeToggle<CR>", "Open Explorer" },
+  -- ["]"] = { "<cmd>NvimTreeFindFile<CR>", "Explorer" },
   -- ["P"] = { "<cmd>Telescope projects<CR>", "Projects" },
   -- ["R"] = { '<cmd>lua require("renamer").rename()<CR>', "Projects" },
   ["z"] = { "<cmd>ZenMode<CR>", "Zen" },
@@ -172,21 +174,19 @@ local mappings = {
       "Pick File",
     },
     s = { "<cmd>wa!<CR>", "Save All" },
-    f = { "<cmd>Telescope find_files<CR>", "Find File" },
+    f = { "<cmd>:Files<CR>", "Find File" },
+    o = { "<cmd>:GFiles<CR>", "Git Files" },
+    g = { "<cmd>:GFiles?<CR>", "Git Changed Files" },
     F = {
       "<cmd>lua require('telescope.builtin').find_files(require('telescope.themes').get_dropdown{previewer = false})<CR>",
       "Find files",
     },
-    r = {
-      "<cmd>lua require('telescope.builtin').oldfiles(require('telescope.themes').get_dropdown{previewer = false})<CR>",
-      "Old files",
-    },
+    r = { "<cmd>:History<CR>", "Old files" },
     S = { "<cmd>w!<CR>", "Save Buffer" },
-    g = { "<cmd>Telescope git_status<CR>", "Git changed file" },
     -- w = { "Find Word Under Cursor" },
     e = {
       name = "Neovim",
-      f = { "Config files" },
+      f = { "<cmd>:NeovimConfigFiles<CR>", "Config files" },
       r = { "Reload" },
     },
   },
@@ -196,7 +196,11 @@ local mappings = {
     f = { "<cmd>Format<CR>", "Format Buffer" },
     O = { "<cmd>lua OrganizeImports()<CR>", "OrganizeImports" },
     o = { "<cmd>lua OrganizeImportsAndFormat()<CR>", "OrganizeImportsAndFormat" },
-    s = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Buffer Symbols" },
+    p = { "Language Print/Log" },
+    l = { "Console.log" },
+    k = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Buffer Symbols" },
+    s = { "<cmd>:ISwap<CR>", "ISwap" },
+    w = { "<cmd>:ISwapWith<CR>", "ISwapWith" },
   },
 
   p = {
@@ -228,7 +232,7 @@ local mappings = {
     u = { "<cmd>lua require 'gitsigns'.undo_stage_hunk()<CR>", "Undo Stage Hunk" },
     o = { "<cmd>Telescope git_status<CR>", "Open changed file" },
     B = { "<cmd>Telescope git_branches<CR>", "Checkout branch" },
-    c = { "<cmd>Telescope git_commits<CR>", "Checkout commit" },
+    c = { "<cmd>:Commits<CR>", "Git Commits" },
     d = {
       "<cmd>Gitsigns diffthis HEAD<CR>",
       "Diff",
@@ -244,18 +248,8 @@ local mappings = {
       "<cmd>Telescope lsp_workspace_diagnostics<CR>",
       "Workspace Diagnostics",
     },
-    -- f = { "<cmd>lua vim.lsp.buf.formatting()<CR>", "Format" },
-    -- F = { "<cmd>LspToggleAutoFormat<CR>", "Toggle Autoformat" },
     i = { "<cmd>LspInfo<CR>", "Info" },
     I = { "<cmd>LspInstallInfo<CR>", "Installer Info" },
-    -- j = {
-    --   "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>",
-    --   "Next Diagnostic",
-    -- },
-    -- k = {
-    --   "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>",
-    --   "Prev Diagnostic",
-    -- },
     l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
     n = { "<cmd>SymbolsOutline<CR>", "Outline" },
     q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "Quickfix" },
@@ -277,24 +271,25 @@ local mappings = {
 
   s = {
     name = "Search",
-    a = { "<cmd>Telescope live_grep theme=ivy<CR>", "Grep Ivy" },
-    A = { "<cmd>Telescope live_grep<CR>", "Grep" },
-    b = { "<cmd>Telescope git_branches<CR>", "Checkout branch" },
-    c = { "<cmd>Telescope colorscheme<CR>", "Colorscheme" },
+    a = { "<cmd>:AGP<CR>", "AGP" },
+    A = { "<cmd>:Ag!<CR>", "AG Full" },
     C = { "<cmd>Telescope commands<CR>", "Commands" },
-    -- f = { "<cmd>Telescope find_files<CR>", "Find File" },
-    h = { "<cmd>Telescope help_tags<CR>", "Help" },
-    -- i = { "<cmd>Telescope media_files<CR>", "Media" },
-    l = { "<cmd>Telescope resume<CR>", "Last Search" },
+    l = { "<cmd>:Lines<CR>", "Search Lines" },
+    f = { "<cmd>:RG<CR>", "RG Fuzzy" },
+    F = { "<cmd>:RG!<CR>", "RG Fuzzy Full" },
+    g = { "<cmd>:GGrep<CR>", "GGrep" },
+    h = { "<cmd>:History/<CR>", "Search History" },
+    c = { "<cmd>:History:<CR>", "Command History" },
     k = { "<cmd>Telescope keymaps<CR>", "Keymaps" },
-    g = { "Grep String For..." },
-    w = { "Find At Cursor" },
+    w = { "<cmd>:Find<CR>", "Find At Cursor" },
     W = { "Find At Cursor(Open Files)" },
     M = { "<cmd>Telescope man_pages<CR>", "Man Pages" },
-    m = { "<cmd>Telescope marks<CR>", "Marks" },
+    m = { "<cmd>:Marks<CR>", "Marks" },
     j = { "<cmd>Telescope jumplist<CR>", "Jumplist" },
-    r = { "<cmd>Telescope registers<CR>", "Recent File" },
-    S = { "Search in buffer" },
+    r = { "<cmd>:Rg<CR>", "RG" },
+    R = { "<cmd>:Rg!<CR>", "RG Full" },
+    s = { "<cmd>:BLines<CR>", "Search Buffer Lines" },
+    t = { "<cmd>:BTags<CR>", "Buffer Tags" },
   },
 
   S = {
