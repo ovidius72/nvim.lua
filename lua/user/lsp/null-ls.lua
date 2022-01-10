@@ -7,12 +7,13 @@ end
 local formatting = null_ls.builtins.formatting
 -- https://github.com/jose-elias-alvarez/null-ls.nvim/tree/main/lua/null-ls/builtins/diagnostics
 local diagnostics = null_ls.builtins.diagnostics
-local codeAction = null_ls.builtins.code_actions
+local code_actions = null_ls.builtins.code_actions
 
 -- https://github.com/prettier-solidity/prettier-plugin-solidity
 -- npm install --save-dev prettier prettier-plugin-solidity
 null_ls.setup {
   debug = false,
+  diagnostics_format = "[#{c}] #{m} (#{s})",
   sources = {
     formatting.prettier.with {
       filetypes = {
@@ -34,10 +35,14 @@ null_ls.setup {
     },
     -- formatting.black.with { extra_args = { "--fast" } },
     formatting.stylua,
+    diagnostics.write_good,
+    code_actions.eslint,
     -- formatting.phpcsfixer,
     -- formatting.stylelint,
-    -- diagnostics.jsonlint,
-    -- codeAction.eslint_d,
+    diagnostics.jsonlint,
+    diagnostics.codespell,
+    formatting.codespell,
+    -- formatting.eslint_d,
     -- codeAction.gitsigns,
   },
 }

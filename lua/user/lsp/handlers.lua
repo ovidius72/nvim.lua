@@ -79,7 +79,6 @@ local function lsp_highlight_document(client)
     )
   end
 end
-local a
 local function lsp_keymaps(bufnr)
   local opts = { noremap = true, silent = true }
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", opts)
@@ -98,13 +97,14 @@ local function lsp_keymaps(bufnr)
   map(0, "n", "go", "<cmd>Lspsaga lsp_finder<cr>", { silent = true, noremap = true })
   map(0, "n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
   map(0, "x", "<leader>ca", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
+  map(0, "n", "<leader>co", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
   map(0, "n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
   map(0, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
   map(0, "n", "gp", "<cmd>Lspsaga preview_definition<cr>", { silent = true, noremap = true })
   map(0, "n", "]c", "<cmd>Lspsaga diagnostic_jump_next<cr>", { silent = true, noremap = true })
   map(0, "n", "[c", "<cmd>Lspsaga diagnostic_jump_prev<cr>", { silent = true, noremap = true })
-  map(0, "n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
-  map(0, "n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
+  -- map(0, "n", "<C-u>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(-1)<cr>", opts)
+  -- map(0, "n", "<C-d>", "<cmd>lua require('lspsaga.action').smart_scroll_with_saga(1)<cr>", opts)
 
   -- vim.api.nvim_buf_set_keymap(
   --   bufnr,

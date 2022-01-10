@@ -14,7 +14,7 @@ OrganizeImports = function (bufnr)
         title = ""
     }
 
-    -- perform a syncronous request
+    -- perform a synchronous request
     -- 500ms timeout depending on the size of file a bigger timeout may be needed
     vim.lsp.buf_request_sync(bufnr, "workspace/executeCommand", params, 500)
 end

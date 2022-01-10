@@ -114,7 +114,6 @@ local mappings = {
   -- ["P"] = { "<cmd>Telescope projects<CR>", "Projects" },
   -- ["R"] = { '<cmd>lua require("renamer").rename()<CR>', "Projects" },
   ["z"] = { "<cmd>ZenMode<CR>", "Zen" },
-  -- ["gy"] = "Link",
 
   ["<space>"] = {
     name = "Telescope",
@@ -150,21 +149,35 @@ local mappings = {
     e = { "Source Buffer" },
   },
 
-  j = {
-    name = "Jump",
-    ["1"] = { "HopChar1" },
-    ["2"] = { "HopChar2" },
-    l = { "HopLine" },
-    w = { "HopWord" },
-    j = { "HopWordAC" },
-    k = { "HopWordBC" },
-    p = { "HopPattern" },
-  },
-  w = {
-    name = "Windows",
-    d = { "<cmd>q<CR>", "Close Window" },
-    v = { "<cmd>vs<CR>", "Split Vertical" },
-    s = { "<cmd>sp<CR>", "Split Horizontal" },
+  c = {
+    name = "Code",
+    -- a = { "<cmd>lua require'lspactions'.code_action()<CR>", "Code Action" },
+    o = { "<cmd>lua require'lspactions'.code_action()<CR>", "Code Action" },
+    -- o = { "<cmd>lua require'lspactions'.range_code_action()<CR>", "Range Code Action" },
+    u = { "<cmd>TroubleToggle<CR>", "Diagnostics" },
+    w = {
+      "<cmd>Telescope lsp_workspace_diagnostics<CR>",
+      "Workspace Diagnostics",
+    },
+    i = { "<cmd>LspInfo<CR>", "Info" },
+    I = { "<cmd>LspInstallInfo<CR>", "Installer Info" },
+    l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
+    n = { "<cmd>SymbolsOutline<CR>", "Outline" },
+    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "Quickfix" },
+    r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
+    j = { "<cmd>TroubleToggle lsp_references<CR>", "References" },
+    s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
+    S = {
+      "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
+      "Workspace Symbols",
+    },
+    t = {
+      name = "Todo",
+      q = { "<cmd>TodoQuickFix<CR>", "Todo QuickFix" },
+      l = { "<cmd>TodoLocList<CR>", "Todo LocList" },
+      r = { "<cmd>TodoTrouble<CR>", "Todo Trouble" },
+      t = { "<cmd>TodoTelescope<CR>", "Todo Telescope" },
+    },
   },
 
   f = {
@@ -191,40 +204,13 @@ local mappings = {
     },
   },
 
-  o = {
-    name = "Other",
-    f = { "<cmd>Format<CR>", "Format Buffer" },
-    O = { "<cmd>lua OrganizeImports()<CR>", "OrganizeImports" },
-    o = { "<cmd>lua OrganizeImportsAndFormat()<CR>", "OrganizeImportsAndFormat" },
-    p = { "Language Print/Log" },
-    l = { "Console.log" },
-    k = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Buffer Symbols" },
-    s = { "<cmd>:ISwap<CR>", "ISwap" },
-    w = { "<cmd>:ISwapWith<CR>", "ISwapWith" },
-  },
-
-  p = {
-    name = "Packer",
-    c = { "<cmd>PackerCompile<CR>", "Compile" },
-    i = { "<cmd>PackerInstall<CR>", "Install" },
-    s = { "<cmd>PackerSync<CR>", "Sync" },
-    S = { "<cmd>PackerStatus<CR>", "Status" },
-    u = { "<cmd>PackerUpdate<CR>", "Update" },
-  },
-
-  r = {
-    name = "Replace",
-    r = { "<cmd>lua require('spectre').open()<CR>", "Replace" },
-    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Replace Word" },
-    f = { "<cmd>lua require('spectre').open_file_search()<CR>", "Replace Buffer" },
-  },
-
   g = {
     name = "Git",
     g = { "<cmd>LazyGit<cr>", "Lazygit" },
     j = { "<cmd>lua require 'gitsigns'.next_hunk()<CR>", "Next Hunk" },
     k = { "<cmd>lua require 'gitsigns'.prev_hunk()<CR>", "Prev Hunk" },
-    m = { "<cmd>GitBlameToggle<CR>", "Blame" },
+    M = { "<cmd>lua require 'git_blame'.run()<CR>", "Blame Lines" },
+    m = { "Blame Popup" },
     h = { "<cmd>lua require 'gitsigns'.preview_hunk()<CR>", "Preview Hunk" },
     r = { "<cmd>lua require 'gitsigns'.reset_hunk()<CR>", "Reset Hunk" },
     R = { "<cmd>lua require 'gitsigns'.reset_buffer()<CR>", "Reset Buffer" },
@@ -239,35 +225,58 @@ local mappings = {
     },
   },
 
-  c = {
-    name = "Code",
-    a = { "<cmd>lua require'lspactions'.code_action()<CR>", "Code Action" },
-    o = { "<cmd>lua require'lspactions'.range_code_action()<CR>", "Range Code Action" },
-    u = { "<cmd>TroubleToggle<CR>", "Diagnostics" },
-    w = {
-      "<cmd>Telescope lsp_workspace_diagnostics<CR>",
-      "Workspace Diagnostics",
+  j = {
+    name = "Jump",
+    ["1"] = { "HopChar1" },
+    ["2"] = { "HopChar2" },
+    l = { "HopLine" },
+    w = { "HopWord" },
+    j = { "HopWordAC" },
+    k = { "HopWordBC" },
+    p = { "HopPattern" },
+  },
+
+  o = {
+    name = "Other",
+    f = { "<cmd>Format<CR>", "Format Buffer" },
+    O = { "<cmd>lua OrganizeImports()<CR>", "OrganizeImports" },
+    o = { "<cmd>lua OrganizeImportsAndFormat()<CR>", "OrganizeImportsAndFormat" },
+    p = { "Language Print/Log" },
+    l = { "Console.log" },
+    k = { "<cmd>lua vim.lsp.buf.document_symbol()<CR>", "Buffer Symbols" },
+    s = { "<cmd>:ISwap<CR>", "ISwap" },
+    w = { "<cmd>:ISwapWith<CR>", "ISwapWith" },
+  },
+
+  p = {
+    name = "Packages",
+    P = {
+      name = "Paker",
+      c = { "<cmd>PackerCompile<CR>", "Compile" },
+      i = { "<cmd>PackerInstall<CR>", "Install" },
+      s = { "<cmd>PackerSync<CR>", "Sync" },
+      S = { "<cmd>PackerStatus<CR>", "Status" },
+      u = { "<cmd>PackerUpdate<CR>", "Update" },
     },
-    i = { "<cmd>LspInfo<CR>", "Info" },
-    I = { "<cmd>LspInstallInfo<CR>", "Installer Info" },
-    l = { "<cmd>lua vim.lsp.codelens.run()<CR>", "CodeLens Action" },
-    n = { "<cmd>SymbolsOutline<CR>", "Outline" },
-    q = { "<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>", "Quickfix" },
-    r = { "<cmd>lua vim.lsp.buf.rename()<CR>", "Rename" },
-    j = { "<cmd>TroubleToggle lsp_references<CR>", "References" },
-    s = { "<cmd>Telescope lsp_document_symbols<CR>", "Document Symbols" },
-    S = {
-      "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
-      "Workspace Symbols",
-    },
-    t = {
-      name = "Todo",
-      q = { "<cmd>TodoQuickFix<CR>", "Todo QuickFix" },
-      l = { "<cmd>TodoLocList<CR>", "Todo LocList" },
-      r = { "<cmd>TodoTrouble<CR>", "Todo Trouble" },
-      t = { "<cmd>TodoTelescope<CR>", "Todo Telescope" },
+    i = {
+      name = "Package Json Info",
+      s = { " Show " },
+      h = { " Hide " },
+      u = { " Update " },
+      d = { " Delete " },
+      i = { " Install " },
+      r = { " Reinstall " },
+      v = { " Change Version " },
     },
   },
+
+  r = {
+    name = "Replace",
+    r = { "<cmd>lua require('spectre').open()<CR>", "Replace" },
+    w = { "<cmd>lua require('spectre').open_visual({select_word=true})<CR>", "Replace Word" },
+    f = { "<cmd>lua require('spectre').open_file_search()<CR>", "Replace Buffer" },
+  },
+
 
   s = {
     name = "Search",
@@ -320,15 +329,38 @@ local mappings = {
     p = { "<cmd>TSPlaygroundToggle<CR>", "Playground" },
   },
 
+  u = {
+    name = "Tests",
+    n = { "Nearest" },
+    f = { "File" },
+    s = { "Suite" },
+    l = { "Last" },
+    v = { "Visit" },
+    o = { "Summary" },
+    u = { "Ultest" },
+    j = { "Jump Output" },
+    N = { "Nearest Ultest" },
+    F = { "Nearest File" },
+    ["["] = { "Prev Failed" },
+    ["]"] = { "Next Failed" },
+  },
   v = {
     name = "Select",
     s = {
       name = "Sandwich",
       a = { "Add Motion... " },
-      d = { "Delete Motion... " },
+     d = { "Delete Motion... " },
       r = { "Replace Motion... " },
     },
   },
+
+  w = {
+    name = "Windows",
+    d = { "<cmd>q<CR>", "Close Window" },
+    v = { "<cmd>vs<CR>", "Split Vertical" },
+    s = { "<cmd>sp<CR>", "Split Horizontal" },
+  },
+
 }
 
 local vopts = {

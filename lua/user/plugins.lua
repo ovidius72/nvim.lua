@@ -71,7 +71,7 @@ return packer.startup(function(use)
   use "windwp/nvim-autopairs" -- Autopairs, integrates with both cmp and treesitter
   use "numToStr/Comment.nvim"
 
-  -- use "kyazdani42/nvim-web-devicons"
+  use "kyazdani42/nvim-web-devicons"
   -- use "kyazdani42/nvim-tree.lua"
   use "matze/vim-move"
   use "lambdalisue/fern.vim"
@@ -89,7 +89,8 @@ return packer.startup(function(use)
   use "lewis6991/impatient.nvim"
   use "lukas-reineke/indent-blankline.nvim"
   use "goolord/alpha-nvim"
-  use "antoinemadec/FixCursorHold.nvim" -- This is needed to fix lsp doc highlight
+  use "petertriho/nvim-scrollbar"
+  use { "kevinhwang91/nvim-hlslens" }
   use "folke/which-key.nvim"
   use "unblevable/quick-scope"
   use "phaazon/hop.nvim"
@@ -112,7 +113,6 @@ return packer.startup(function(use)
   use "metakirby5/codi.vim"
   use "gelguy/wilder.nvim"
   use "dstein64/vim-win"
-  use ""
   -- use { "ray-x/navigator.lua", requires = { "ray-x/guihua.lua", run = "cd lua/fzy && make" } }
   use "machakann/vim-sandwich"
   use "wellle/targets.vim"
@@ -124,11 +124,19 @@ return packer.startup(function(use)
     ft = "markdown",
   }
   use { "rcarriga/vim-ultest", requires = { "vim-test/vim-test" }, run = ":UpdateRemotePlugins" }
-  use { "junegunn/fzf", dir = '~/.fzf', run = ':call fzf#install'}
+  use { "junegunn/fzf", dir = "~/.fzf", run = ":call fzf#install" }
   use "junegunn/fzf.vim"
   use "mbbill/undotree"
+  use 'kevinhwang91/rnvimr'
+
+  use "mfussenegger/nvim-treehopper"
+  use {
+    "vuki656/package-info.nvim",
+    requires = "MunifTanjim/nui.nvim",
+  }
   use "simnalamburt/vim-mundo"
   use "kdheepak/lazygit.nvim"
+  use "alec-gibson/nvim-tetris"
 
   -- Colorschemes
   use "folke/tokyonight.nvim"
@@ -196,10 +204,19 @@ return packer.startup(function(use)
 
   -- Git
   use "lewis6991/gitsigns.nvim"
-  use "f-person/git-blame.nvim"
+  -- use "f-person/git-blame.nvim"
   use "ruifm/gitlinker.nvim"
   use "mattn/vim-gist"
   use "mattn/webapi-vim"
+  -- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use {
+    "tanvirtin/vgit.nvim",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    },
+  }
+  use { "bobrown101/git-blame.nvim" }
+  use "rhysd/git-messenger.vim"
 
   -- DAP
   use "mfussenegger/nvim-dap"
