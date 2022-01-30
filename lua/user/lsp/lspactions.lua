@@ -1,4 +1,4 @@
-vim.lsp.handlers["textDocument/codeAction"] = require("lspactions").codeaction
+-- vim.lsp.handlers["textDocument/codeAction"] = require("lspactions").codeaction
 
 local function run_action(action)
   if action.edit or type(action.command) == "table" then

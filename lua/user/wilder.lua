@@ -36,7 +36,7 @@ call wilder#set_option('renderer', wilder#popupmenu_renderer(wilder#popupmenu_bo
       \ 'min_height': '10%',
       \ 'max_height': '30%',
       \ 'border': 'rounded',
-       \ 'left': [
+      \ 'left': [
       \   ' ', wilder#popupmenu_devicons(),
       \ ],
       \ 'right': [

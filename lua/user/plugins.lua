@@ -86,7 +86,9 @@ return packer.startup(function(use)
   use "nvim-lualine/lualine.nvim"
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
-  use "lewis6991/impatient.nvim"
+  -- use "lewis6991/impatient.nvim"
+  use 'j-hui/fidget.nvim'
+  use 'haringsrob/nvim_context_vt'
   use "lukas-reineke/indent-blankline.nvim"
   use "goolord/alpha-nvim"
   use "petertriho/nvim-scrollbar"
@@ -170,7 +172,7 @@ return packer.startup(function(use)
   use "tamago324/nlsp-settings.nvim" -- language server settings defined in json for
   use "jose-elias-alvarez/null-ls.nvim" -- for formatters and linters
   use "filipdutescu/renamer.nvim"
-  use "simrat39/symbols-outline.nvim"
+  -- use "simrat39/symbols-outline.nvim"
   use "ray-x/lsp_signature.nvim"
   use "b0o/SchemaStore.nvim"
   use "RishabhRD/popfix"
@@ -180,6 +182,7 @@ return packer.startup(function(use)
     "folke/trouble.nvim",
     cmd = "TroubleToggle",
   }
+  use "jose-elias-alvarez/nvim-lsp-ts-utils"
 
   -- Java
   use "mfussenegger/nvim-jdtls"

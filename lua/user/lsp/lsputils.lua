@@ -6,11 +6,13 @@ local border_chars = {
   BOTTOM_LEFT = "└",
   BOTTOM_RIGHT = "┘",
 }
+
 vim.g.lsp_utils_codeaction_opts = {
   height = 4,
-	preview = {
+  mode = 'editor',
+	list = {
 		border = true,
-		numbering = false,
+		numbering = true,
 		highlight = "PmenuSbar"
 	},
   border = true,

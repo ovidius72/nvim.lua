@@ -249,9 +249,9 @@ cmp.setup {
       local abbr = vim_item.abbr
       local menu = vim_item.menu
 
-      vim_item.kind = string.format("%s %s ", kind_icons[vim_item.kind], abbr) -- This concatonates the icons with the name of the item kind
-      vim_item.abbr = string.format(" %05s%10s ", menu, kind) -- This concatonates the icons with the name of the item kind
-      vim_item.menu = "" -- string.format("%-50s", menu) -- This concatonates the icons with the name of the item kind
+      vim_item.kind = string.format("%s %s ", kind_icons[vim_item.kind], abbr) -- This concatenates the icons with the name of the item kind
+      vim_item.abbr = string.format(" %05s%10s ", menu, kind) -- This concatenates the icons with the name of the item kind
+      vim_item.menu = "" -- string.format("%-50s", menu) -- This concatenates the icons with the name of the item kind
 
       -- NOTE: order matters
       return vim_item

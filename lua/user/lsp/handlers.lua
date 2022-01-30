@@ -1,5 +1,6 @@
 local M = {}
 local map = vim.api.nvim_buf_set_keymap
+local TS = require "user.lsp.lsputils"
 
 M.setup = function()
   local signs = {
@@ -46,7 +47,8 @@ M.setup = function()
   vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
     border = "rounded",
   })
-  vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+  -- vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
+  vim.lsp.handlers["textDocument/codeAction"] = require("lspactions").codeaction
   vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
   vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
   vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
@@ -54,14 +56,6 @@ M.setup = function()
   vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
   vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
   vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
-
-  --  vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
-  --  vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
-  --  vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
-  --  vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
-  --  vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
-  --  vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
-  --  vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
 end
 
 local function lsp_highlight_document(client)
@@ -87,7 +81,7 @@ local function lsp_keymaps(bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>cR", "<cmd>lua vim.lsp.buf.rename()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>", opts)
-  -- vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
+  vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>ca", "<cmd>lua vim.lsp.buf.code_action()<CR>", opts)
   vim.api.nvim_buf_set_keymap(bufnr, "n", "<leader>od", "<cmd>lua vim.diagnostic.open_float()<CR>", opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "[c", '<cmd>lua vim.diagnostic.goto_prev({ border = "rounded" })<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, "n", "]c", '<cmd>lua vim.diagnostic.goto_next({ border = "rounded" })<CR>', opts)
@@ -95,9 +89,9 @@ local function lsp_keymaps(bufnr)
   map(0, "n", "<leader>ch", "<cmd>Lspsaga signature_help<cr>", { silent = true, noremap = true })
   map(0, "n", "<leader>cr", "<cmd>Lspsaga rename<cr>", { silent = true, noremap = true })
   map(0, "n", "go", "<cmd>Lspsaga lsp_finder<cr>", { silent = true, noremap = true })
-  map(0, "n", "<leader>ca", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
-  map(0, "x", "<leader>ca", ":<c-u>Lspsaga range_code_action<cr>", { silent = true, noremap = true })
-  map(0, "n", "<leader>co", "<cmd>Lspsaga code_action<cr>", { silent = true, noremap = true })
+  map(0, "n", "<leader>ca", "<cmd>lua require'lspactions'.code_action()<cr>", { silent = true, noremap = true })
+  map(0, "x", "<leader>ca", ":<c-u>lua require'lspactions'.code_action()<cr>", { silent = true, noremap = true })
+  map(0, "n", "<leader>co", "<cmd>lua require'lspactions'.code_action()<cr>", { silent = true, noremap = true })
   map(0, "n", "K", "<cmd>Lspsaga hover_doc<cr>", { silent = true, noremap = true })
   map(0, "n", "gl", "<cmd>Lspsaga show_line_diagnostics<cr>", { silent = true, noremap = true })
   map(0, "n", "gp", "<cmd>Lspsaga preview_definition<cr>", { silent = true, noremap = true })
@@ -125,7 +119,10 @@ end
 M.on_attach = function(client, bufnr)
   -- notify(client.name)
   if client.name == "tsserver" then
+    require("user.lsp.ts-utils").setup_lsp_ts()
     client.resolved_capabilities.document_formatting = false
+    client.resolved_capabilities.document_range_formatting = false
+    client.resolved_capabilities.document_diagnostic = false
   end
   lsp_keymaps(bufnr)
   lsp_highlight_document(client)
