@@ -1,0 +1,1 @@
+“‘ÄspecÄvÄ+“‘Älet g:miniyank_maxitems = 100ÄVÄ+“‘Äd  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}ÄVÄ+“‘Ä'      \ fzf#vim#with_preview('up:60%'),ÄVÄ+“‘Äbfredl/nvim-miniyank'ÄvÄ+

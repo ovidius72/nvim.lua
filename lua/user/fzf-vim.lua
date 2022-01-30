@@ -176,6 +176,31 @@ nmap <Leader>sa :AGP<CR>
 nmap <Leader>sA :Ag!<CR>
 nmap <Leader>fw :Find<CR>
 
+let g:miniyank_maxitems = 100
+let g:miniyank_filename = $HOME."/.config/nvim/.miniyank.mpack"
+function! s:fzf_miniyank(put_before, fullscreen) abort
+    function! Sink(opt, line) abort
+        let l:key = substitute(a:line, ' .*', '', '')
+        if empty(a:line) | return | endif
+        let l:yanks = miniyank#read()[l:key]
+        call miniyank#drop(l:yanks, a:opt)
+    endfunction
+
+    let l:put_action = a:put_before ? 'P' : 'p'
+    let l:name = a:put_before ? 'YanksBefore' : 'YanksAfter'
+    let l:spec = {}
+    let l:spec['source'] = map(miniyank#read(), {k,v -> k.' '.join(v[0], '\n')})
+    let l:spec['sink'] = {val -> Sink(l:put_action, val)}
+    let l:spec['options'] = '--no-sort --prompt="Yanks-'.l:put_action.'> "'
+    call fzf#run(fzf#wrap(l:name, l:spec, a:fullscreen))
+endfunction
+
+command! -bang YanksBefore call s:fzf_miniyank(1, <bang>0)
+command! -bang YanksAfter call s:fzf_miniyank(0, <bang>0)
+
+map <A-p> :YanksAfter<CR>
+map <A-P> :YanksBefore<CR>
+
 " nmap <Leader>gF :call fzf#vim#gitfiles('', fzf#vim#with_preview('up'))<CR>
 command! -bang -nargs=* Find
   \ call fzf#vim#grep(
