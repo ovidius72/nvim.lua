@@ -118,6 +118,8 @@ local mappings = {
   ["<space>"] = {
     name = "Telescope",
     s = { "<cmd>Telescope live_grep default_text=<c-r>0<CR>", "Live Grep" },
+    f = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Git Files" },
+    F = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "All Files" },
     S = { "<cmd>Telescope grep_string<CR>", "Grep String" },
     b = { "<cmd>Telescope builtin<CR>", "Builtins" },
     B = { "<cmd>Telescope file_browser<CR>", "File Browser" },

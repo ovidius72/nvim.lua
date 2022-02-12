@@ -14,6 +14,7 @@ telescope.setup {
     prompt_prefix = "  ",
     selection_caret = " ",
     path_display = { "smart" },
+    initial_mode = 'insert',
     layout_config = {
       horizontal = {
         preview_height = 0.9,
@@ -164,21 +165,21 @@ vim.api.nvim_set_keymap("n", "<leader>fef", "<cmd>lua SearchVimFiles()<CR>", { n
 
 vim.api.nvim_set_keymap(
   "n",
-  "<leader>sg",
+  "<leader><leader>sg",
   "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input('Grep For> ')})<cr>",
   { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
   "n",
-  "<leader>ss",
+  "<leader><leader>ss",
   "<cmd>lua require('telescope.builtin').current_buffer_fuzzy_find()<cr>",
   { noremap = true, silent = true }
 )
 
 vim.api.nvim_set_keymap(
   "n",
-  "<leader>sw",
+  "<leader><leader>sw",
   "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.expand('<cword>')})<cr>",
   { noremap = true, silent = true }
 )

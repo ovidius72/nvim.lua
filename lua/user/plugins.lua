@@ -87,7 +87,8 @@ return packer.startup(function(use)
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   -- use "lewis6991/impatient.nvim"
-  use 'j-hui/fidget.nvim'
+  use 'echasnovski/mini.nvim'
+  use("LudoPinelli/comment-box.nvim")
   use 'haringsrob/nvim_context_vt'
   use 'bfredl/nvim-miniyank'
   use 'TimUntersberger/neogit'
@@ -213,7 +214,7 @@ return packer.startup(function(use)
   use "ruifm/gitlinker.nvim"
   use "mattn/vim-gist"
   use "mattn/webapi-vim"
-  -- use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use {
     "tanvirtin/vgit.nvim",
     requires = {

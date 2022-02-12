@@ -13,7 +13,7 @@ vim.g.indent_blankline_filetype_exclude = {
   "NvimTree",
   "Trouble",
 }
-vim.g.indentLine_enabled = 1
+vim.g.indentLine_enabled = 0
 -- vim.g.indent_blankline_char = "│"
 vim.g.indent_blankline_char = "▏"
 -- vim.g.indent_blankline_char = "▎"
@@ -61,6 +61,7 @@ indent_blankline.setup {
   -- show_end_of_line = true,
   -- space_char_blankline = " ",
   show_current_context = true,
+  enabled = false,
   -- show_current_context_start = true,
   -- char_highlight_list = {
   --   "IndentBlanklineIndent1",
