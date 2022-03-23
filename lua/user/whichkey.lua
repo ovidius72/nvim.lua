@@ -117,7 +117,7 @@ local mappings = {
 
   ["<space>"] = {
     name = "Telescope",
-    s = { "<cmd>Telescope live_grep default_text=<c-r>0<CR>", "Live Grep" },
+    -- s = { "<cmd>Telescope live_grep default_text=<c-r>0<CR>", "Live Grep" },
     f = { "<cmd>lua require('telescope.builtin').git_files()<CR>", "Git Files" },
     F = { "<cmd>lua require('telescope.builtin').find_files()<CR>", "All Files" },
     S = { "<cmd>Telescope grep_string<CR>", "Grep String" },
@@ -182,6 +182,13 @@ local mappings = {
     },
   },
 
+  -- Explorer
+  e = {
+    name = 'Explorer',
+    ["e"] = { "<cmd>:Fern . -drawer -toggle -width=35<CR>", "Open Explorer" },
+    ["f"] = { "<cmd>:Fern . -drawer -reveal=% -width=35<CR>", "Focus Explorer" },
+
+  },
   f = {
     name = "Files",
     p = {

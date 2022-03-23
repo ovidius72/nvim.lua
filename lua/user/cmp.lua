@@ -272,7 +272,6 @@ cmp.setup {
       },
     },
     { name = "nvim_lua", priority = 3 },
-    { name = "path", priority = 2 },
     { name = "emoji", priority = 1 },
   },
   confirm_opts = {

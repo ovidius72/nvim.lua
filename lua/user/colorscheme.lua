@@ -1,3 +1,35 @@
+require("onedark").setup {
+  style = "deep",
+  transparent = false, -- Show/hide background
+  term_colors = true, -- Change terminal color as per the selected theme style
+  ending_tildes = false, -- Show the end-of-buffer tildes. By default they are hidden
+  -- toggle theme style ---
+  toggle_style_key = "<leader>ts", -- Default keybinding to toggle
+  toggle_style_list = { "dark", "darker", "cool", "deep", "warm", "warmer", "light" }, -- List of styles to toggle between
+
+  -- Change code style ---
+  -- Options are italic, bold, underline, none
+  -- You can configure multiple style with comma separated, For e.g., keywords = 'italic,bold'
+  code_style = {
+    comments = "italic",
+    keywords = "none",
+    functions = "italic",
+    strings = "none",
+    variables = "bold",
+  },
+
+  -- Custom Highlights --
+  colors = {}, -- Override default colors
+  highlights = {}, -- Override highlight groups
+
+  -- Plugins Config --
+  diagnostics = {
+    darker = true, -- darker colors for diagnostic
+    undercurl = true, -- use undercurl instead of underline for diagnostics
+    background = true, -- use background color for virtual text
+  },
+}
+
 local catppuccin = require "catppuccin"
 
 -- configure it
@@ -65,28 +97,44 @@ catppuccin.setup {
 -- @usage 'base' | 'moon' | 'dawn' | 'rose-pine[-moon][-dawn]'
 vim.g.rose_pine_variant = "moon"
 -- Disable italics
-vim.g.rose_pine_disable_italics = false
+vim.g.disable_italics = false
 -- Use terminal background
-vim.g.rose_pine_disable_background = false
-vim.g.rose_pine_bold_vertical_split_line = true
-vim.g.rose_pine_inactive_background = false
+vim.g.bold_vert_split = true
+vim.g.dim_nc_background = false
+vim.g.disable_background = false
 function ChangeRosePineTheme()
-  require('rose-pine').toggle()
+  require("rose-pine").toggle()
   -- ReloadLualine()
   -- setTransapentBackground()
 end
 
 function SetRosePineVariant(variant)
-  require('rose-pine').set(variant)
+  require("rose-pine").set(variant)
   -- ReloadLualine()
 end
-vim.api.nvim_set_keymap('n', '<leader>t1', [[<cmd>lua SetRosePineVariant('dawn')<cr>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>t2', [[<cmd>lua SetRosePineVariant('moon')<cr>]], { noremap = true, silent = true })
-vim.api.nvim_set_keymap('n', '<leader>t3', [[<cmd>lua SetRosePineVariant('base')<cr>]], { noremap = true, silent = true })
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>t1",
+  [[<cmd>lua SetRosePineVariant('dawn')<cr>]],
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>t2",
+  [[<cmd>lua SetRosePineVariant('moon')<cr>]],
+  { noremap = true, silent = true }
+)
+vim.api.nvim_set_keymap(
+  "n",
+  "<leader>t3",
+  [[<cmd>lua SetRosePineVariant('base')<cr>]],
+  { noremap = true, silent = true }
+)
 
 vim.cmd [[
 try
-  colorscheme rose-pine
+  colorscheme github_dimmed
+  set laststatus=3
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
   set background=dark
@@ -99,3 +147,13 @@ endtry
 --   hi PmenuSbar guibg=#727272 ctermbg=60
 --   hi PmenuThumb guibg=#424865 ctermbg=60
 -- ]]
+vim.opt.fillchars:append {
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┨",
+  vertright = "┣",
+  verthoriz = "╋",
+}
+require("kanagawa").setup { globalStatus = true, ... }

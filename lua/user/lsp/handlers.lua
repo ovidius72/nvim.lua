@@ -1,6 +1,6 @@
 local M = {}
 local map = vim.api.nvim_buf_set_keymap
-local TS = require "user.lsp.lsputils"
+local TS = require "user.lsp.lsputils-config"
 
 M.setup = function()
   local signs = {

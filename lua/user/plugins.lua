@@ -87,11 +87,12 @@ return packer.startup(function(use)
   use "akinsho/toggleterm.nvim"
   use "ahmedkhalf/project.nvim"
   -- use "lewis6991/impatient.nvim"
-  use 'echasnovski/mini.nvim'
-  use("LudoPinelli/comment-box.nvim")
-  use 'haringsrob/nvim_context_vt'
-  use 'bfredl/nvim-miniyank'
-  use 'TimUntersberger/neogit'
+  use "echasnovski/mini.nvim"
+  -- use 'hoschi/yode-nvim'
+  use "LudoPinelli/comment-box.nvim"
+  -- use 'haringsrob/nvim_context_vt'
+  use "bfredl/nvim-miniyank"
+  use "TimUntersberger/neogit"
   use "lukas-reineke/indent-blankline.nvim"
   use "goolord/alpha-nvim"
   use "petertriho/nvim-scrollbar"
@@ -111,7 +112,7 @@ return packer.startup(function(use)
   use "ThePrimeagen/harpoon"
   use "MattesGroeger/vim-bookmarks"
   use "lunarvim/vim-solidity"
-  use "blackCauldron7/surround.nvim"
+  -- use "blackCauldron7/surround.nvim"
   use "Shatur/neovim-session-manager"
   use "rcarriga/nvim-notify"
   use "tversteeg/registers.nvim"
@@ -132,8 +133,17 @@ return packer.startup(function(use)
   use { "junegunn/fzf", dir = "~/.fzf", run = ":call fzf#install" }
   use "junegunn/fzf.vim"
   use "mbbill/undotree"
-  use 'kevinhwang91/rnvimr'
+  use "kevinhwang91/rnvimr"
 
+  use {
+    "kyazdani42/nvim-tree.lua",
+    requires = {
+      "kyazdani42/nvim-web-devicons", -- optional, for file icon
+    },
+    config = function()
+      require("nvim-tree").setup {}
+    end,
+  }
   use "mfussenegger/nvim-treehopper"
   use {
     "vuki656/package-info.nvim",
@@ -149,6 +159,9 @@ return packer.startup(function(use)
   use "lunarvim/darkplus.nvim"
   use "rose-pine/neovim"
   use "rebelot/kanagawa.nvim"
+  use "navarasu/onedark.nvim"
+  use "projekt0n/github-nvim-theme"
+
   use {
     "catppuccin/nvim",
     as = "catppuccin",
@@ -195,6 +208,7 @@ return packer.startup(function(use)
   use "tom-anders/telescope-vim-bookmarks.nvim"
   use "nvim-telescope/telescope-media-files.nvim"
   use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+  use { "kelly-lin/telescope-ag", requires = { { "nvim-telescope/telescope.nvim" } } }
 
   -- Treesitter
   use {
@@ -214,7 +228,7 @@ return packer.startup(function(use)
   use "ruifm/gitlinker.nvim"
   use "mattn/vim-gist"
   use "mattn/webapi-vim"
-  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
+  use { "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" }
   use {
     "tanvirtin/vgit.nvim",
     requires = {

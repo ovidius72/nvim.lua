@@ -8,6 +8,7 @@ local action_layout = require "telescope.actions.layout"
 
 telescope.load_extension "media_files"
 telescope.load_extension "fzf"
+telescope.load_extension "ag"
 
 telescope.setup {
   defaults = {
@@ -161,7 +162,7 @@ vim.api.nvim_set_keymap(
   "y<ESC>:Telescope live_grep default_text=<c-r>0<CR>",
   { noremap = true, silent = true }
 )
-vim.api.nvim_set_keymap("n", "<leader>fef", "<cmd>lua SearchVimFiles()<CR>", { noremap = true, silent = true })
+vim.api.nvim_set_keymap("n", "<leader><leader>ef", "<cmd>lua SearchVimFiles()<CR>", { noremap = true, silent = true })
 
 vim.api.nvim_set_keymap(
   "n",
