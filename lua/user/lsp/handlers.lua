@@ -119,7 +119,7 @@ end
 M.on_attach = function(client, bufnr)
   -- notify(client.name)
   if client.name == "tsserver" then
-    require("user.lsp.ts-utils").setup_lsp_ts()
+    require("user.lsp.ts-utils-config").setup_lsp_ts()
     client.resolved_capabilities.document_formatting = false
     client.resolved_capabilities.document_range_formatting = false
     client.resolved_capabilities.document_diagnostic = false

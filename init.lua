@@ -4,7 +4,7 @@ require "user.plugins"
 require "user.colorscheme"
 require "user.cmp"
 require "user.lsp"
-require "user.telescope"
+require "user.telescope-config"
 require "user.treesitter"
 require "user.autopairs"
 require "user.comment"
@@ -62,6 +62,8 @@ require "user.vim-test"
 require "user.undotree"
 require "user.lazygit"
 require "user.neogit-config"
+require "user.goto-preview-config"
+
 vim.cmd [[
   omap     <silent> m :<C-U>lua require('tsht').nodes()<CR>
   vnoremap <silent> m :lua require('tsht').nodes()<CR>

@@ -24,7 +24,7 @@ vim.g.lsp_utils_codeaction_opts = {
   },
 }
 vim.g.lsp_utils_location_opts = {
-  height = 34,
+  height = 24,
   mode = "editor",
   border_chars = border_chars,
   list = {

@@ -124,10 +124,10 @@ telescope.setup {
       filetypes = { "png", "webp", "jpg", "jpeg" },
       find_cmd = "rg", -- find command (defaults to `fd`)
     },
-    fzy_native = {
-      override_generic_sorter = false,
-      override_file_sorter = true,
-    },
+    -- fzy_native = {
+    --   override_generic_sorter = false,
+    --   override_file_sorter = true,
+    -- },
     fzf = {
       fuzzy = true, -- false will only do exact matching
       override_generic_sorter = true, -- override the generic sorter

@@ -81,7 +81,7 @@ nvim_tree.setup {
   },
   git = {
     enable = true,
-    ignore = false,
+    ignore = true,
     timeout = 500,
   },
   view = {
@@ -96,6 +96,7 @@ nvim_tree.setup {
         { key = { "l", "<CR>", "o" }, cb = tree_cb "edit" },
         { key = "h", cb = tree_cb "close_node" },
         { key = "v", cb = tree_cb "vsplit" },
+        { key = "<leader>]", cb = "<C-w><C-p>" },
       },
     },
     number = false,

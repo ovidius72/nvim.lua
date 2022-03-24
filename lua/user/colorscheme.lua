@@ -1,3 +1,31 @@
+require('nightfox').setup({
+  options = {
+    -- Compiled file's destination location
+    compile_path = vim.fn.stdpath("cache") .. "/nightfox",
+    compile_file_suffix = "_compiled", -- Compiled file suffix
+    transparent = false,    -- Disable setting background
+    terminal_colors = true, -- Set terminal colors (vim.g.terminal_color_*) used in `:terminal`
+    dim_inactive = false,   -- Non focused panes set to alternative background
+    styles = {              -- Style to be applied to different syntax groups
+      comments = "italic",    -- Value is any valid attr-list value `:help attr-list`
+      functions = "NONE",
+      keywords = "bold",
+      numbers = "NONE",
+      strings = "NONE",
+      types = "NONE",
+      variables = "bold",
+    },
+    inverse = {             -- Inverse highlight for different types
+      match_paren = false,
+      visual = false,
+      search = false,
+    },
+    -- modules = {             -- List of various plugins and additional options
+    --   -- ...
+    -- },
+  }
+})
+
 require("onedark").setup {
   style = "deep",
   transparent = false, -- Show/hide background
@@ -61,7 +89,7 @@ catppuccin.setup {
       },
     },
     lsp_trouble = true,
-    lsp_saga = false,
+    lsp_saga = true,
     gitgutter = true,
     gitsigns = true,
     telescope = true,
@@ -75,9 +103,9 @@ catppuccin.setup {
       colored_indent_levels = true,
     },
     dashboard = false,
-    neogit = false,
+    neogit = true,
     vim_sneak = false,
-    fern = false,
+    fern = true,
     barbar = false,
     bufferline = true,
     markdown = false,
@@ -131,9 +159,22 @@ vim.api.nvim_set_keymap(
   { noremap = true, silent = true }
 )
 
+require("kanagawa").setup { globalStatus = true, ... }
+
+vim.opt.laststatus = 3
+vim.opt.fillchars:append {
+  horiz = "━",
+  horizup = "┻",
+  horizdown = "┳",
+  vert = "┃",
+  vertleft = "┨",
+  vertright = "┣",
+  verthoriz = "╋",
+}
+
 vim.cmd [[
 try
-  colorscheme github_dimmed
+  colorscheme duskfox
   set laststatus=3
 catch /^Vim\%((\a\+)\)\=:E185/
   colorscheme default
@@ -147,13 +188,3 @@ endtry
 --   hi PmenuSbar guibg=#727272 ctermbg=60
 --   hi PmenuThumb guibg=#424865 ctermbg=60
 -- ]]
-vim.opt.fillchars:append {
-  horiz = "━",
-  horizup = "┻",
-  horizdown = "┳",
-  vert = "┃",
-  vertleft = "┨",
-  vertright = "┣",
-  verthoriz = "╋",
-}
-require("kanagawa").setup { globalStatus = true, ... }

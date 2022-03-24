@@ -106,13 +106,13 @@ local mappings = {
   ["<tab>"] = { "Prev Buffer" },
   ["i"] = { "<cmd>:Files<CR>", "Find File" },
   ["l"] = { "<cmd>:Buffers<CR>", "Open Buffers" },
-  ["["] = { "<cmd>:Fern . -drawer -toggle -width=35<CR>", "Open Explorer" },
-  ["]"] = { "<cmd>:Fern . -drawer -reveal=% -width=35<CR>", "Focus Explorer" },
+  -- ["["] = { "<cmd>:Fern . -drawer -toggle -width=35<CR>", "Open Explorer" },
+  -- ["]"] = { "<cmd>:Fern . -drawer -reveal=% -width=35<CR>", "Focus Explorer" },
   ["/"] = { '<cmd>lua require("Comment.api").toggle_current_linewise()<CR>', "Comment" },
-  -- ["["] = { "<cmd>NvimTreeToggle<CR>", "Open Explorer" },
-  -- ["]"] = { "<cmd>NvimTreeFindFile<CR>", "Explorer" },
-  -- ["P"] = { "<cmd>Telescope projects<CR>", "Projects" },
-  -- ["R"] = { '<cmd>lua require("renamer").rename()<CR>', "Projects" },
+  ["["] = { "<cmd>NvimTreeToggle<CR>", "Open Explorer" },
+  ["]"] = { "<cmd>NvimTreeFindFile<CR>", "Explorer" },
+  ["P"] = { "<cmd>Telescope projects<CR>", "Projects" },
+  ["R"] = { '<cmd>lua require("renamer").rename()<CR>', "Projects" },
   ["z"] = { "<cmd>ZenMode<CR>", "Zen" },
 
   ["<space>"] = {
@@ -180,6 +180,8 @@ local mappings = {
       r = { "<cmd>TodoTrouble<CR>", "Todo Trouble" },
       t = { "<cmd>TodoTelescope<CR>", "Todo Telescope" },
     },
+    y = {"<cmd>YanksAfter<CR>", "Yanks After"},
+    Y = {"<cmd>YanksBefore<CR>", "Yanks Before"}
   },
 
   -- Explorer

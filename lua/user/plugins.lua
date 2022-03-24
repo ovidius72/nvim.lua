@@ -161,6 +161,7 @@ return packer.startup(function(use)
   use "rebelot/kanagawa.nvim"
   use "navarasu/onedark.nvim"
   use "projekt0n/github-nvim-theme"
+  use "EdenEast/nightfox.nvim"
 
   use {
     "catppuccin/nvim",
@@ -199,9 +200,14 @@ return packer.startup(function(use)
     cmd = "TroubleToggle",
   }
   use "jose-elias-alvarez/nvim-lsp-ts-utils"
-
-  -- Java
-  use "mfussenegger/nvim-jdtls"
+  use {
+    "rmagatti/goto-preview",
+    config = function()
+      require("goto-preview").setup {
+        default_mappings = true,
+      }
+    end,
+  }
 
   -- Telescope
   use "nvim-telescope/telescope.nvim"
